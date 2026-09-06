@@ -3,9 +3,9 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'ORE AI | Mine Safety Intelligence',
+  description: 'Observe, recognize, and receive early warning through AI-powered mine subsidence monitoring.',
+  generator: 'ORE AI',
   icons: {
     icon: [
       {
