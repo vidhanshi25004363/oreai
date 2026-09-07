@@ -1,0 +1,5 @@
+{
+  "terminal.integrated.commandsToSkipShell": [
+    "python -m pip install fastapi uvicorn pydantic pandas numpy scikit-learn joblib"
+  ]
+}
