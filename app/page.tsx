@@ -81,6 +81,7 @@ export default function Page() {
     setPredictionError(false)
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '')
+      console.log('[v0] Prediction API URL:', apiUrl ? `${apiUrl}/predict` : '(not configured)')
       if (!apiUrl) throw new Error('Prediction API URL is not configured')
       const response = await fetch(`${apiUrl}/predict`, {
         method: 'POST',
@@ -103,6 +104,7 @@ export default function Page() {
       })
       if (!response.ok) throw new Error(`Prediction request failed: ${response.status}`)
       const result: { risk_level?: string; confidence?: number } = await response.json()
+      console.log('[v0] Prediction API response:', result)
       const returnedRisk = result.risk_level?.trim().toLowerCase()
       const normalizedRisk: PredictionRisk | null = returnedRisk === 'critical' ? 'Critical' : returnedRisk === 'warning' ? 'Warning' : returnedRisk === 'normal' ? 'Normal' : null
       if (!normalizedRisk || typeof result.confidence !== 'number') throw new Error('Invalid prediction response')
