@@ -17,7 +17,11 @@ export default function MineMap({ sensors, selected, onSelect, theme }: { sensor
     L.tileLayer(theme === 'light' ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map)
     L.control.zoom({ position: 'bottomright' }).addTo(map)
     instanceRef.current = map
-    return () => { map.remove(); instanceRef.current = null }
+    return () => {
+      map.remove()
+      instanceRef.current = null
+      markersRef.current = {}
+    }
   }, [theme])
 
   useEffect(() => {

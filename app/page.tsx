@@ -78,7 +78,6 @@ export default function Page() {
   const riskScore = Math.min(99, Math.round(average(sensors.map((sensor) => sensor.displacement)) * 7 + (simulating ? 20 : 0)))
   const riskLevel: Severity = riskScore > 72 ? 'Critical' : riskScore > 45 ? 'Warning' : 'Normal'
   const online = sensors.filter((sensor) => sensor.status === 'Online').length
-  const atRisk = sensors.filter((sensor) => sensor.severity !== 'Normal').length
   const zones = [...new Set(sensors.map((sensor) => sensor.zone))]
 
   const reset = () => { setSimulating(false); setSensors(baseSensors); setHistory(baseHistory); setSelected(baseSensors[2]) }
@@ -97,11 +96,10 @@ export default function Page() {
         <header className="topbar"><div><p className="eyebrow">MINE OPERATIONS CENTER / {activeNav.toUpperCase()}</p><h1>{activeNav === 'Dashboard' ? 'Underground Safety Overview' : activeNav}</h1></div><div className="top-actions"><div className="system-live"><span className="pulse-dot" /> SYSTEM LIVE <small>DEMO</small></div><div className="updated"><span>Last updated</span><strong>{updated}</strong></div><Button variant="outline" size="icon" aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} className="icon-button theme-toggle" onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}>{theme === 'dark' ? <Sun /> : <Moon />}</Button><Button variant="outline" size="icon" aria-label="Notifications" className="icon-button"><Bell /></Button><div className="avatar">OM</div></div></header>
         <div className="demo-banner"><div><span className="banner-icon"><Radio /></span><div><strong>DEMO MODE — Simulated sensor network</strong><p>Readings are realistic prototype data. Hardware ingestion is ready for future ESP32 + LoRa + FastAPI connection.</p></div></div><span className="banner-code">SIM/ORE-2026</span></div>
         <div className="kpi-grid">
-          <Kpi icon={<Cpu />} label="Active Sensor Nodes" value="08" detail="of 08 provisioned" tone="blue" />
-          <Kpi icon={<Wifi />} label="Nodes Online" value={`${online.toString().padStart(2, '0')}`} detail={`${Math.round(online / sensors.length * 100)}% connectivity`} tone="green" />
-          <Kpi icon={<AlertTriangle />} label="Zones at Risk" value={`${zones.filter((zone) => sensors.filter((s) => s.zone === zone && s.severity !== 'Normal').length > 0).length.toString().padStart(2, '0')}`} detail="requires attention" tone="yellow" />
-          <Kpi icon={<Bell />} label="Active Alerts" value={simulating ? '03' : '02'} detail="1 new simulated" tone="red" />
-          <Kpi icon={<ShieldCheck />} label="Overall Mine Risk" value={`${riskScore}%`} detail={`${riskLevel} assessment`} tone={riskLevel === 'Critical' ? 'red' : riskLevel === 'Warning' ? 'yellow' : 'green'} />
+          <Kpi icon={<Cpu />} label="Active Sensor Nodes" value={sensors.length.toString().padStart(2, '0')} detail="monitored in this view" tone="blue" />
+          <Kpi icon={<Activity />} label="Monitored Parameters" value="03" detail="displacement · tilt · vibration" tone="green" />
+          <Kpi icon={<Bell />} label="Active Alerts" value={simulating ? '03' : '02'} detail="current event queue" tone="red" />
+          <Kpi icon={<RefreshCcw />} label="Last Telemetry" value={updated} detail="streaming dashboard clock" tone="yellow" />
         </div>
         <div className="dashboard-grid">
           <section className="panel map-panel"><PanelHeading title="Live Mine Map" subtitle="Sensor node topology · simulated coordinates" icon={<MapPin />} action={<span className="map-legend"><i className="legend normal" /> Normal <i className="legend warning" /> Warning <i className="legend critical" /> Critical</span>} /><div className="map-wrap"><MineMap sensors={sensors} selected={selected} onSelect={setSelected} theme={theme} /><div className="map-overlay"><span>LEVEL 4 / EAST SEAM</span><strong>2,840 m below surface</strong></div></div><div className="selected-sensor"><div><span className={`sensor-status ${severityClass(selected.severity)}`} /><strong>{selected.id}</strong><span>{selected.zone}</span></div><div className="selected-values"><span><b>{selected.displacement} mm</b> displacement</span><span><b>{selected.tilt}°</b> tilt</span><span><b>{selected.vibration} g</b> vibration</span></div><span className={`severity-badge ${severityClass(selected.severity)}`}>{selected.severity}</span></div></section>
