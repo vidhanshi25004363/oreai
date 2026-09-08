@@ -23,3 +23,29 @@ button { font: inherit; }
 .zones-panel { margin-top: 15px; }.table-meta { color: #68838e; font-size: 9px; }.table-scroll { overflow-x: auto; }table { width: 100%; border-collapse: collapse; font-size: 10px; }th { text-align: left; color: #68838e; font-size: 8px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 10px 17px; border-top: 1px solid #19343e; border-bottom: 1px solid #19343e; }td { padding: 11px 17px; border-bottom: 1px solid #19343e; color: #b8cdd1; }td strong, td small { display: block; }td small { color: #63808a; font-size: 8px; margin-top: 4px; }.trend-up { color: #ffbd54; }.footer-note { display: flex; justify-content: space-between; gap: 15px; padding: 17px 2px 0; color: #55737d; font-size: 9px; }.footer-note svg { width: 11px; vertical-align: middle; margin-right: 4px; }.footer-note b { color: #7ca4ae; font-weight: 500; }
 @media (max-width: 1100px) { .ore-sidebar { width: 205px; flex-basis: 205px; }.ore-content { width: calc(100% - 205px); padding: 20px; }.kpi-grid { grid-template-columns: repeat(3, 1fr); }.dashboard-grid, .lower-grid { grid-template-columns: 1fr; }.assessment-panel, .alerts-panel { grid-column: 1; grid-row: auto; } }
 @media (max-width: 760px) { .ore-shell { display: block; }.ore-sidebar { width: 100%; height: auto; padding: 13px; border-right: 0; border-bottom: 1px solid var(--sidebar-border); }.brand-block { padding: 0; }.demo-pill { display: none; }.side-nav { flex-direction: row; overflow-x: auto; scrollbar-width: none; }.side-nav::-webkit-scrollbar { display: none; }.nav-item { flex: 0 0 auto; padding: 8px; }.nav-item span, .nav-item b, .sidebar-footer { display: none; }.ore-content { width: 100%; padding: 17px 12px; }.topbar { align-items: flex-start; }.topbar h1 { font-size: 18px; }.top-actions { gap: 8px; }.system-live, .updated { display: none; }.kpi-grid { grid-template-columns: repeat(2, 1fr); }.kpi-card { padding: 11px; }.kpi-card strong { font-size: 20px; }.demo-banner { align-items: flex-start; }.banner-code { display: none; }.map-legend { display: none; }.selected-sensor { align-items: flex-start; flex-wrap: wrap; }.selected-values { min-width: 100%; order: 3; }.health-grid { grid-template-columns: repeat(2, 1fr); }.simulation-copy { align-items: flex-start; flex-direction: column; }.control-buttons { width: 100%; }.control-buttons button { flex: 1; }.footer-note { flex-direction: column; }.panel-heading { padding-left: 12px; padding-right: 12px; }.risk-content { padding-left: 13px; padding-right: 13px; gap: 13px; }.risk-gauge { transform: scale(.86); transform-origin: top left; } }
+
+[data-theme='light'] { color-scheme: light; --background: #eef2f4; --foreground: #16262d; --card: #ffffff; --card-foreground: #16262d; --popover: #ffffff; --popover-foreground: #16262d; --primary: #087ea5; --primary-foreground: #ffffff; --secondary: #e2ebee; --secondary-foreground: #24414b; --muted: #e8eef0; --muted-foreground: #5e747d; --accent: #dceff4; --accent-foreground: #163b49; --border: #d2dee2; --input: #c5d5da; --ring: #087ea5; --sidebar: #f7fafb; --sidebar-foreground: #24414b; --sidebar-primary: #087ea5; --sidebar-primary-foreground: #ffffff; --sidebar-accent: #e6f1f4; --sidebar-accent-foreground: #163b49; --sidebar-border: #d5e1e5; }
+[data-theme='light'] .ore-shell { background: var(--background); }
+[data-theme='light'] .brand-mark { background: #e5f2f5; }
+[data-theme='light'] .brand-tag, [data-theme='light'] .eyebrow, [data-theme='light'] .panel-heading p, [data-theme='light'] .kpi-card span, [data-theme='light'] .chart-foot, [data-theme='light'] .table-meta { color: var(--muted-foreground); }
+[data-theme='light'] .nav-item { color: #5e747d; }
+[data-theme='light'] .nav-item:hover, [data-theme='light'] .nav-item.active { background: var(--sidebar-accent); color: var(--primary); }
+[data-theme='light'] .nav-item.active { box-shadow: inset 2px 0 var(--primary); }
+[data-theme='light'] .demo-pill { color: #8d621d; background: #fff7e7; border-color: #e8c97e; }
+[data-theme='light'] .panel { background: var(--card); box-shadow: 0 8px 22px rgba(37, 64, 74, .08); }
+[data-theme='light'] .demo-banner { background: #e4f1f4; border-color: #bfd8df; }
+[data-theme='light'] .demo-banner strong, [data-theme='light'] .topbar h1, [data-theme='light'] .kpi-card strong, [data-theme='light'] .panel-heading h2, [data-theme='light'] .health-top strong, [data-theme='light'] .simulation-copy strong { color: var(--foreground); }
+[data-theme='light'] .demo-banner p, [data-theme='light'] .simulation-copy p, [data-theme='light'] .health-metrics, [data-theme='light'] .factor-list span, [data-theme='light'] .ai-explanation, [data-theme='light'] td { color: #58717a; }
+[data-theme='light'] .map-wrap, [data-theme='light'] .leaflet-map, [data-theme='light'] .leaflet-container { background: #dce8eb; }
+[data-theme='light'] .map-overlay { background: rgba(255,255,255,.9); border-color: #c6d6da; }
+[data-theme='light'] .map-overlay strong { color: var(--foreground); }
+[data-theme='light'] .selected-sensor { background: #f8fbfc; }
+[data-theme='light'] .range-tabs { border-color: var(--border); }
+[data-theme='light'] .range-tabs button.selected { background: #d9edf2; color: #12627b; }
+[data-theme='light'] .chart-legend, [data-theme='light'] .map-legend { color: #5e747d; }
+[data-theme='light'] .progress, [data-theme='light'] .mini-progress { background: #dce7ea; }
+[data-theme='light'] th, [data-theme='light'] td, [data-theme='light'] .health-item { border-color: #e0e8ea; }
+[data-theme='light'] .footer-note { color: #66808a; }
+[data-theme='light'] .theme-toggle { background: #fff7e7; color: #8d621d; border-color: #e8c97e; }
+.theme-toggle { transition: background .2s ease, color .2s ease, border-color .2s ease; }
+@media (max-width: 760px) { .top-actions .theme-toggle { display: grid; } }

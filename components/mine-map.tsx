@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css'
 
 type Sensor = { id: string; zone: string; lat: number; lng: number; displacement: number; tilt: number; vibration: number; battery: number; signal: number; status: 'Online' | 'Offline'; severity: 'Normal' | 'Warning' | 'Critical'; lastSeen: string }
 
-export default function MineMap({ sensors, selected, onSelect }: { sensors: Sensor[]; selected: Sensor; onSelect: (sensor: Sensor) => void }) {
+export default function MineMap({ sensors, selected, onSelect, theme }: { sensors: Sensor[]; selected: Sensor; onSelect: (sensor: Sensor) => void; theme: 'dark' | 'light' }) {
   const mapRef = useRef<HTMLDivElement>(null)
   const instanceRef = useRef<L.Map | null>(null)
   const markersRef = useRef<Record<string, L.CircleMarker>>({})
@@ -14,11 +14,11 @@ export default function MineMap({ sensors, selected, onSelect }: { sensors: Sens
   useEffect(() => {
     if (!mapRef.current || instanceRef.current) return
     const map = L.map(mapRef.current, { zoomControl: false, attributionControl: false, minZoom: 12, maxZoom: 16 }).setView([51.498, -0.075], 13)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map)
+    L.tileLayer(theme === 'light' ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map)
     L.control.zoom({ position: 'bottomright' }).addTo(map)
     instanceRef.current = map
     return () => { map.remove(); instanceRef.current = null }
-  }, [])
+  }, [theme])
 
   useEffect(() => {
     const map = instanceRef.current
